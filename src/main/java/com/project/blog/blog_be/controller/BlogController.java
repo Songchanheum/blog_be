@@ -1,12 +1,35 @@
 package com.project.blog.blog_be.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.project.blog.blog_be.service.impl.BlogService;
+
+
 
 @RestController
 public class BlogController {
+
+    @Autowired
+    public BlogService blogService;
+
     @GetMapping("/post")
-    public String getPost(){
-        return "123";
+    public Map<String,Object> getPost(@RequestParam(value="tag", required = false) String tag, @RequestParam(value="category", required = false) String category, @RequestParam(value="cursor", required = false) String cursor) throws Exception{
+        Map<String,Object> result = blogService.getBlogPost(tag, category, cursor);
+        return result;
     }
+    @GetMapping("/categories")
+    public List<Object> getCategories() {
+        return blogService.getCategories();
+    }
+    @GetMapping("/tags")
+    public List<Object> getTags() {
+        return blogService.getTags();
+    }
+    
 }
