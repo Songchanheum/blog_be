@@ -7,9 +7,8 @@ import lombok.Setter;
 @Setter
 public class BlogFilterVo {
 
-    Object filter;
+  Object filter;
 
-    String start_cursor;
-    Integer page_size;
-
+  String start_cursor;
+  Integer page_size;
 }
